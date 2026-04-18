@@ -53,17 +53,13 @@ README.md
 1. Place the folder inside your server resources:
 
 ```
-
-resources/[ui]/nox-loading
-
+resources/[ui]/hs-loadingscreen
 ```
 
 2. Add this line to your `server.cfg`:
 
 ```
-
-ensure nox-loading
-
+ensure hs-loadingscreen
 ```
 
 ## 🎵 Music Setup
