@@ -5,6 +5,10 @@ Part of the **HyperSentry Labs** ecosystem.
 
 A modern and cinematic FiveM loading screen built with 2026‑style UI/UX principles and fully optimized performance.
 
+## 📸 Preview
+
+![Preview](assets/preview.png)
+
 ## ✨ Features
 
 - 🎬 Cinematic video‑based background with depth layers
