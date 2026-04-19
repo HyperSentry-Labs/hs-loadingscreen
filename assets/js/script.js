@@ -11,11 +11,93 @@ const el = {
   progressText: document.getElementById("progressPercent"),
   statusText: document.getElementById("statusText"),
   tipText: document.getElementById("tipText"),
-  music: document.getElementById("bgMusic"),
+
+  video: document.querySelector(".bg-video"),
+
   playBtn: document.getElementById("playBtn"),
   muteBtn: document.getElementById("muteBtn"),
   volume: document.getElementById("volumeSlider"),
 };
+document.addEventListener(
+  "click",
+  () => {
+    el.video.muted = false;
+  },
+  { once: true },
+);
+document.addEventListener("DOMContentLoaded", () => {
+  const state = {
+    progress: 0,
+    status: "CONNECTING",
+    muted: false,
+    volume: 0.5,
+  };
+
+  const el = {
+    progressFill: document.getElementById("progressFill"),
+    progressText: document.getElementById("progressPercent"),
+    statusText: document.getElementById("statusText"),
+    tipText: document.getElementById("tipText"),
+    video: document.querySelector(".bg-video"),
+    playBtn: document.getElementById("playBtn"),
+    muteBtn: document.getElementById("muteBtn"),
+    volume: document.getElementById("volumeSlider"),
+  };
+
+  if (!el.video) {
+    console.error("Background video not found");
+    return;
+  }
+
+  let isPlaying = false;
+
+  el.volume.value = state.volume;
+  el.video.volume = state.volume;
+  el.video.loop = true;
+
+  function setPlayIcon(playing) {
+    el.playBtn.innerHTML = playing
+      ? `<svg viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>`
+      : `<svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>`;
+  }
+
+  el.playBtn.onclick = async () => {
+    try {
+      if (!isPlaying) {
+        await el.video.play();
+        isPlaying = true;
+      } else {
+        el.video.pause();
+        isPlaying = false;
+      }
+
+      setPlayIcon(isPlaying);
+    } catch (err) {
+      console.log("Video play blocked");
+    }
+  };
+
+  el.muteBtn.onclick = () => {
+    state.muted = !state.muted;
+    el.video.muted = state.muted;
+  };
+
+  el.volume.oninput = (e) => {
+    state.volume = parseFloat(e.target.value);
+    el.video.volume = state.volume;
+  };
+});
+document.addEventListener("keydown", (e) => {
+  // جلوگیری از تداخل با input / range
+  const tag = document.activeElement.tagName;
+  if (tag === "INPUT" || tag === "TEXTAREA") return;
+
+  // M یا Space
+  if (e.code === "KeyM" || e.code === "Space") {
+    e.preventDefault(); // جلوگیری از scroll با Space
+    toggleMute();
+  }
+});
 
 // ----------------------
 // 🎬 STATUS SYSTEM
@@ -72,13 +154,14 @@ function setProgress(value) {
 }
 
 // ======================
-// 🎵 MUSIC SYSTEM FIXED
+// 🎵 video SYSTEM FIXED
 // ======================
 let isPlaying = false;
 
 el.volume.value = state.volume;
-el.music.volume = state.volume;
-el.music.loop = true;
+el.video.volume = state.volume;
+// el.video.volume = state.volume;
+el.video.loop = true;
 
 // helper: update play icon
 function setPlayIcon(playing) {
@@ -95,57 +178,104 @@ function setPlayIcon(playing) {
   `;
 }
 
-// PLAY / PAUSE
-el.playBtn.onclick = async () => {
-  try {
-    if (!isPlaying) {
-      await el.music.play();
-      isPlaying = true;
-    } else {
-      el.music.pause();
-      isPlaying = false;
-    }
+// PLAY / PAUSE : video
+// el.playBtn.onclick = async () => {
+//   try {
+//     if (!isPlaying) {
+//       await el.video.play();
+//       isPlaying = true;
+//     } else {
+//       el.video.pause();
+//       isPlaying = false;
+//     }
 
-    setPlayIcon(isPlaying);
-  } catch (err) {
-    console.log("Audio blocked until user interaction");
-  }
-};
+//     setPlayIcon(isPlaying);
+//   } catch (err) {
+//     console.log("Audio blocked until user interaction");
+//   }
+// };
 
-// MUTE
-el.muteBtn.onclick = () => {
+// PLAY / PAUSE : Video
+// el.playBtn.onclick = async () => {
+//   try {
+//     if (!isPlaying) {
+//       await el.video.play();
+//       isPlaying = true;
+//     } else {
+//       el.video.pause();
+//       isPlaying = false;
+//     }
+
+//     setPlayIcon(isPlaying);
+//   } catch (err) {
+//     console.log("Video play blocked until user interaction");
+//   }
+// };
+// video always plays — play button disabled
+el.playBtn.style.display = "none";
+
+// MUTE : video
+// el.muteBtn.onclick = () => {
+//   state.muted = !state.muted;
+//   el.video.muted = state.muted;
+
+//   el.muteBtn.innerHTML = state.muted
+//     ? `<svg viewBox="0 0 24 24"><path d="M16.5 12c0-1.77-1-3.29-2.5-4.03v8.05c1.5-.73 2.5-2.25 2.5-4.02zM3 9v6h4l5 5V4L7 9H3z"/></svg>`
+//     : `<svg viewBox="0 0 24 24"><path d="M16.5 12c0-1.77-1-3.29-2.5-4.03v8.05c1.5-.73 2.5-2.25 2.5-4.02zM3 9v6h4l5 5V4L7 9H3z"/></svg>`;
+// };
+
+// MUTE : video
+function toggleMute() {
   state.muted = !state.muted;
-  el.music.muted = state.muted;
+  el.video.muted = state.muted;
 
   el.muteBtn.innerHTML = state.muted
-    ? `<svg viewBox="0 0 24 24"><path d="M16.5 12c0-1.77-1-3.29-2.5-4.03v8.05c1.5-.73 2.5-2.25 2.5-4.02zM3 9v6h4l5 5V4L7 9H3z"/></svg>`
-    : `<svg viewBox="0 0 24 24"><path d="M16.5 12c0-1.77-1-3.29-2.5-4.03v8.05c1.5-.73 2.5-2.25 2.5-4.02zM3 9v6h4l5 5V4L7 9H3z"/></svg>`;
-};
+    ? `<svg viewBox="0 0 24 24">
+         <path d="M16.5 12c0-1.77-1-3.29-2.5-4.03v8.05c1.5-.73 2.5-2.25 2.5-4.02zM3 9v6h4l5 5V4L7 9H3z"/>
+       </svg>`
+    : `<svg viewBox="0 0 24 24">
+         <path d="M3 9v6h4l5 5V4L7 9H3z"/>
+       </svg>`;
+}
 
-// VOLUME
+// VOLUME: video
+// el.volume.oninput = (e) => {
+//   state.volume = parseFloat(e.target.value);
+//   el.video.volume = state.volume;
+// };
+
+// VOLUME: video
 el.volume.oninput = (e) => {
   state.volume = parseFloat(e.target.value);
-  el.music.volume = state.volume;
+  el.video.volume = state.volume;
 };
 
 // FADE IN (FIXED - prevents stacking intervals)
 let fadeInterval = null;
 
-el.music.addEventListener("play", () => {
-  if (fadeInterval) clearInterval(fadeInterval);
+// el.video.addEventListener("play", () => {
+//   if (fadeInterval) clearInterval(fadeInterval);
 
-  let v = 0;
-  el.music.volume = 0;
+//   let v = 0;
+//   el.video.volume = 0;
 
-  fadeInterval = setInterval(() => {
-    if (v < state.volume) {
-      v += 0.02;
-      el.music.volume = Math.min(v, state.volume);
-    } else {
-      clearInterval(fadeInterval);
-    }
-  }, 30);
-});
+//   fadeInterval = setInterval(() => {
+//     if (v < state.volume) {
+//       v += 0.02;
+//       el.video.volume = Math.min(v, state.volume);
+//     } else {
+//       clearInterval(fadeInterval);
+//     }
+//   }, 30);
+// });
+
+document.addEventListener(
+  "click",
+  () => {
+    el.video.muted = false;
+  },
+  { once: true },
+);
 
 // ======================
 // 🌐 FIVEM HOOKS FIXED
@@ -218,16 +348,6 @@ function updateRealHint() {
   }, 150);
 }
 
-// unlock audio on first interaction (FiveM fix)
-document.addEventListener(
-  "click",
-  () => {
-    if (el.music.paused) {
-      el.music.play().then(() => {
-        isPlaying = true;
-        setPlayIcon(true);
-      });
-    }
-  },
-  { once: true },
-);
+if (!el.video) {
+  console.error("Background video not found");
+}
