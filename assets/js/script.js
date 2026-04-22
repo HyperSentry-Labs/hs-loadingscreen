@@ -16,7 +16,6 @@ document.addEventListener("DOMContentLoaded", () => {
     progressFill: document.getElementById("progressFill"),
     progressText: document.getElementById("progressPercent"),
     statusText: document.getElementById("statusText"),
-    tipText: document.getElementById("tipText"),
 
     video: document.querySelector(".bg-video"),
 
@@ -136,29 +135,51 @@ document.addEventListener("DOMContentLoaded", () => {
     setTimeout(() => {
       el.statusText.textContent = statusMap[status] || status;
       el.statusText.style.opacity = 1;
-      updateRealHint();
+      scheduleHintUpdate();
     }, 120);
   }
 
   // ----------------------
-  // PROGRESS SYSTEM
+  // PROGRESS SYSTEM (FIVEM REALISTIC FIXED)
   // ----------------------
+
   let targetProgress = 0;
-  let currentProgress = 0;
   let displayProgress = 0;
   let lastServerProgress = 0;
 
+  const STAGE_BIAS = [
+    { max: 15, speed: 0.04 }, // CONNECTING
+    { max: 50, speed: 0.07 }, // DOWNLOADING
+    { max: 85, speed: 0.05 }, // STREAMING
+    { max: 100, speed: 0.02 }, // FINALIZING
+  ];
+
+  function getSpeed(value) {
+    for (const stage of STAGE_BIAS) {
+      if (value <= stage.max) return stage.speed;
+    }
+    return 0.05;
+  }
+
   function animateProgress() {
-    const lerpSpeed = 0.06;
+    const speed = getSpeed(displayProgress); // ✅ FIX: use displayProgress
 
-    displayProgress += (targetProgress - displayProgress) * lerpSpeed;
+    displayProgress += (targetProgress - displayProgress) * speed;
 
+    // clean clamp
     if (Math.abs(targetProgress - displayProgress) < 0.01) {
       displayProgress = targetProgress;
     }
 
-    el.progressFill.style.width = displayProgress.toFixed(2) + "%";
-    el.progressText.textContent = Math.floor(displayProgress) + "%";
+    // hard snap at 100
+    if (targetProgress >= 100 && displayProgress > 99.9) {
+      displayProgress = 100;
+    }
+
+    const v = displayProgress;
+
+    el.progressFill.style.width = v + "%";
+    el.progressText.textContent = Math.floor(v) + "%";
 
     requestAnimationFrame(animateProgress);
   }
@@ -168,22 +189,27 @@ document.addEventListener("DOMContentLoaded", () => {
   function setProgress(value) {
     const safeValue = Math.min(Math.max(Number(value) || 0, 0), 100);
 
-    if (safeValue < lastServerProgress) {
-      return;
-    }
+    if (safeValue < lastServerProgress) return;
 
     lastServerProgress = safeValue;
     targetProgress = safeValue;
 
-    if (safeValue < 25) setStatus("CONNECTING");
-    else if (safeValue < 60) setStatus("DOWNLOADING");
-    else if (safeValue < 90) setStatus("STREAMING");
-    else setStatus("FINALIZING");
-  }
+    // stable status transitions (no spam)
+    const prev = state.status;
 
+    if (safeValue < 15) state.status = "CONNECTING";
+    else if (safeValue < 50) state.status = "DOWNLOADING";
+    else if (safeValue < 85) state.status = "STREAMING";
+    else state.status = "FINALIZING";
+
+    if (prev !== state.status) {
+      setStatus(state.status);
+    }
+  }
   // ----------------------
-  // HINT SYSTEM
+  // HINT SYSTEM (STABLE VERSION)
   // ----------------------
+
   const realHints = {
     CONNECTING: [
       "Establishing secure session...",
@@ -199,20 +225,28 @@ document.addEventListener("DOMContentLoaded", () => {
     FINALIZING: ["Optimizing environment...", "Preparing spawn location..."],
   };
 
-  function updateRealHint() {
+  let hintLock = false;
+  let hintTimer = null;
+
+  function scheduleHintUpdate() {
+    if (hintLock) return;
+
+    hintLock = true;
+
+    if (hintTimer) clearTimeout(hintTimer);
+
+    hintTimer = setTimeout(() => {
+      updateHint();
+      hintLock = false;
+    }, 600);
+  }
+
+  function updateHint() {
     const group = realHints[state.status];
     if (!group) return;
 
     const text = group[Math.floor(Math.random() * group.length)];
-
-    el.tipText.style.opacity = 0;
-
-    setTimeout(() => {
-      el.tipText.textContent = text;
-      el.tipText.style.opacity = 1;
-    }, 150);
   }
-
   // ----------------------
   // FIVEM HOOKS
   // ----------------------
