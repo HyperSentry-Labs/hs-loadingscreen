@@ -17,6 +17,10 @@
   <!-- Main stylesheet (critical render path) -->
   <link rel="stylesheet" href="assets/css/style.css" />
 
+  <!-- Preconnect for font performance -->
+  <link rel="preconnect" href="assets/fonts" />
+  <link rel="preload" href="assets/fonts/Inter/inter.css" as="style" />
+
   <!-- Font stylesheet -->
   <link rel="stylesheet" href="assets/fonts/Inter/inter.css" />
   <meta name="author" content="Matin Shahabadi" />
@@ -106,11 +110,7 @@
         </div>
 
         <div class="music-controls">
-          <button id="playBtn" class="music-btn" aria-label="Play music">
-            <svg viewBox="0 0 24 24">
-              <path d="M8 5v14l11-7z" />
-            </svg>
-          </button>
+
 
           <button id="muteBtn" class="music-btn" aria-label="Mute audio">
             <svg viewBox="0 0 24 24">
@@ -160,7 +160,8 @@
   </div>
 
   <!-- <audio id="bgMusic" src="assets/audio/bg-music.mp3" loop></audio> -->
-
+  <div class="cursor-dot" aria-hidden="true"></div>
+  <div class="cursor-ring" aria-hidden="true"></div>
   <script src="assets/js/script.js"></script>
 </body>
 
