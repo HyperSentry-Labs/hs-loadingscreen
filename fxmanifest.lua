@@ -3,10 +3,10 @@ game 'gta5'
 
 author 'power0matin / HyperSentry Labs'
 description 'NOX RolePlay Loading Screen - Premium FiveM Loading UI'
-version '1.1.0'
+version '1.2.0'
 
 -- NOX RolePlay Loading Screen
--- Release: 1.1.0
+-- Release: 1.2.0
 -- Notes:
 -- - Premium cinematic loading UI
 -- - Custom cursor support

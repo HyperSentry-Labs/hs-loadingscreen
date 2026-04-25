@@ -130,7 +130,7 @@ game 'gta5'
 
 author 'power0matin / HyperSentry Labs'
 description 'NOX RolePlay Loading Screen - Premium FiveM Loading UI'
-version '1.1.0'
+version '1.2.0'
 
 ui_page 'index.html'
 
@@ -594,10 +594,10 @@ Before publishing a new release:
 Current release:
 
 ```txt
-v1.1.0
+v1.2.0
 ```
 
-### v1.1.0 Highlights
+### v1.2.0 Highlights
 
 - Removed MP3 dependency from release manifest
 - Removed Play/Pause behavior
