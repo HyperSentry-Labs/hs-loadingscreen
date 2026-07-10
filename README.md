@@ -1,6 +1,6 @@
 # NOX RolePlay Loading Screen 🎮
 
-Premium cinematic FiveM loading screen by **power0matin**  
+Premium cinematic FiveM loading screen by **[@power0matin](https://github.com/power0matin)**  
 Part of the **HyperSentry Labs** ecosystem.
 
 **NOX RolePlay Loading Screen** is a modern, immersive, and performance-focused FiveM loading UI built for roleplay servers that need a polished first impression. It includes a cinematic video background, real FiveM loading progress sync, smooth stage-based UI feedback, custom cursor, glassmorphism panels, keyboard audio shortcuts, and a clean local-asset architecture.
