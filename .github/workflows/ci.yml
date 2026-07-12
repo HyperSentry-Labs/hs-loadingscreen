@@ -15,9 +15,18 @@ jobs:
       uses: actions/checkout@v7
 
     - name: Validate HTML
-      uses: validator/validator-action@v1
-      with:
-        file: index.html
+      run: |
+        echo "Validating HTML..."
+        RESPONSE=$(curl -s -H "Content-Type: text/html; charset=utf-8" --data-binary @index.html https://validator.w3.org/nu/?out=json)
+        ERRORS=$(echo "$RESPONSE" | grep -c '"type":"error"' || true)
+        WARNINGS=$(echo "$RESPONSE" | grep -c '"type":"info"' || true)
+        echo "Errors: $ERRORS, Warnings: $WARNINGS"
+        if [ "$ERRORS" -gt 0 ]; then
+          echo "HTML validation errors found:"
+          echo "$RESPONSE" | grep -A2 '"type":"error"'
+          exit 1
+        fi
+        echo "HTML validation passed!"
 
     - name: Check file structure
       run: |
