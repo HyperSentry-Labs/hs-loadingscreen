@@ -18,11 +18,9 @@
 
 Trusted by **100+ FiveM servers** worldwide. Part of the **HyperSentry Labs** ecosystem.
 
----
 
 **Keywords:** `fiveM loading screen` `fiveM loading screen script` `GTA V loading screen` `fiveM resource` `roleplay loading screen` `cinematic loading screen` `fiveM UI` `custom loading screen` `fiveM NUI` `loading screen for fiveM`
 
----
 
 ## 🚀 Quick Start
 
@@ -42,7 +40,6 @@ echo "ensure hs-loadingscreen" >> server.cfg
 
 **That's it!** No configuration needed. Works out of the box.
 
----
 
 ## 🎬 Demo
 
@@ -50,7 +47,6 @@ echo "ensure hs-loadingscreen" >> server.cfg
 
 **Watch the video demo:** [Coming Soon]
 
----
 
 ## 💬 What Users Say
 
@@ -60,7 +56,6 @@ echo "ensure hs-loadingscreen" >> server.cfg
 
 > "Easy to install and customize. Perfect for our RP server." — Developer
 
----
 
 ## 🏆 Why NOX Loading Screen?
 
@@ -82,7 +77,6 @@ echo "ensure hs-loadingscreen" >> server.cfg
 - **Interactive cursor** — Engaging feedback
 - **Keyboard shortcuts** — Quick audio control
 
----
 
 ## 📊 Stats
 
@@ -94,7 +88,6 @@ echo "ensure hs-loadingscreen" >> server.cfg
 | 📱 Mobile Support | Yes |
 | 🔄 Last Updated | Active Development |
 
----
 
 ## 🔍 SEO Tags
 
@@ -108,7 +101,6 @@ Most FiveM loading screens are outdated, slow, and lack polish. Players judge yo
 ### The Solution
 NOX Loading Screen delivers a **console-quality loading experience** that keeps players engaged from the moment they connect.
 
----
 
 ## 🎯 Features
 
@@ -154,7 +146,6 @@ NOX Loading Screen delivers a **console-quality loading experience** that keeps 
 - **Website** link with target="_blank"
 - **Styled buttons** with hover effects and animations
 
----
 
 ## 📊 Comparison: NOX vs Other Loading Screens
 
@@ -198,7 +189,6 @@ hs-loadingscreen/
 └── README.md                   # This file
 ```
 
----
 
 ## 🚀 Quick Installation (2 Minutes)
 
@@ -231,7 +221,6 @@ ensure hs-loadingscreen
 
 **That's it!** Your loading screen is now active.
 
----
 
 ## ⚙️ FiveM Manifest (Reference)
 
@@ -267,7 +256,6 @@ loadscreen_manual_shutdown 'yes'
 
 > **Note:** No MP3 files required. Audio is embedded in `background.mp4`.
 
----
 
 ## 🎵 Audio Setup
 
@@ -287,7 +275,6 @@ Replace the audio track in `assets/background.mp4` using any video editor.
 | FPS | 30 or 60 |
 | Audio Loudness | Moderate (JS applies 0.1x multiplier) |
 
----
 
 ## ⌨️ Keyboard Shortcuts
 
@@ -300,7 +287,6 @@ Replace the audio track in `assets/background.mp4` using any video editor.
 
 > **No Play/Pause button** — the cinematic video runs continuously as designed.
 
----
 
 ## 🧠 FiveM NUI Events
 
@@ -336,7 +322,6 @@ SendNUIMessage({
 })
 ```
 
----
 
 ## 📊 Loading Stage System
 
@@ -352,7 +337,6 @@ The UI automatically detects and displays the current loading stage:
 
 Each stage has unique **display labels**, **progress speeds**, and **rotating contextual hints**.
 
----
 
 ## 🖱️ Custom Cursor System
 
@@ -371,7 +355,6 @@ Each stage has unique **display labels**, **progress speeds**, and **rotating co
 
 Place before the script tag at the end of `<body>`.
 
----
 
 ## 🔒 Interaction Locks
 
@@ -383,7 +366,6 @@ The UI prevents unwanted browser interactions:
 
 This keeps the loading screen feeling like part of the game.
 
----
 
 ## 🧩 Configuration
 
@@ -427,7 +409,6 @@ const CONFIG = {
 | | `ringLerp` | 0.18 | Ring movement smoothing |
 | | `pulseDuration` | 560 | Click effect duration |
 
----
 
 ## 🎨 Customization Guide
 
@@ -456,7 +437,6 @@ Edit `index.html`:
 ### Change Status Text
 Edit the `STAGES` object in `assets/js/script.js` to customize labels and hints.
 
----
 
 ## 🎯 Use Cases
 
@@ -478,7 +458,6 @@ Professional loading screens for serious economy-based servers.
 ### Any Server Type
 Works with any FiveM server — just customize the assets!
 
----
 
 ## 🌟 Showcase
 
@@ -489,7 +468,6 @@ Works with any FiveM server — just customize the assets!
 
 **Want to be featured?** Submit a pull request with your server name!
 
----
 
 ## 🏗️ Technical Architecture
 
@@ -529,7 +507,6 @@ hs-loadingscreen/
 - **status** — Dynamic status messages
 - **Manual Shutdown** — Clean resource management
 
----
 
 ## ❓ Frequently Asked Questions
 
@@ -551,7 +528,6 @@ Absolutely. You can change the logo, video, colors, text, and all behavior throu
 ### Can I use it commercially?
 Yes. The MIT License allows commercial use. Credit is appreciated but not required.
 
----
 
 ## 🐛 Troubleshooting
 
@@ -571,7 +547,6 @@ FiveM must send `loadProgress` events. Check your server configuration.
 ### Native cursor appears sometimes
 The CSS includes `cursor: none !important` globally. If it leaks, check for conflicting styles.
 
----
 
 ## 🤝 Contributing
 
@@ -585,7 +560,6 @@ Contributions are welcome! Please:
 **Contributing Guide:** [CONTRIBUTING.md](CONTRIBUTING.md)
 **Code of Conduct:** [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md)
 
----
 
 ## 📜 License
 
@@ -593,7 +567,6 @@ MIT License — free to use, modify, and distribute.
 
 Credit is appreciated but not required.
 
----
 
 ## 🙏 Credits
 
@@ -602,7 +575,6 @@ Developed by **power0matin** | **HyperSentry Labs**
 - [GitHub](https://github.com/power0matin)
 - [HyperSentry Labs](https://github.com/HyperSentry-Labs)
 
----
 
 ## ⭐ Star This Repo
 
@@ -627,7 +599,6 @@ If this loading screen helped your server, please give it a ⭐ star! It helps o
 - **Minimal DOM** — only necessary elements
 - **Smart caching** — browser-native optimization
 
----
 
 ## 📋 Release Checklist
 
@@ -645,7 +616,6 @@ Before deploying to production:
 - [ ] Custom cursor appears on desktop
 - [ ] Text selection is disabled
 
----
 
 ## 🙏 Thank You
 
@@ -663,7 +633,6 @@ Thank you for using NOX Loading Screen! We hope it brings a premium experience t
 - 🤝 **Contribute** code or documentation
 - 📢 **Share** with other server owners
 
----
 
 ## 🔍 Transparency
 
@@ -685,7 +654,6 @@ Thank you for using NOX Loading Screen! We hope it brings a premium experience t
 - **Transparent Changelog** — All changes documented
 - **No Hidden Costs** — 100% free
 
----
 
 ## ⚠️ Disclaimer
 
@@ -697,7 +665,6 @@ This project is not affiliated with Rockstar Games, FiveM, or Take-Two Interacti
 
 Use at your own risk. We are not responsible for any issues that may arise.
 
----
 
 ## 📈 Analytics
 
@@ -719,7 +686,6 @@ Use at your own risk. We are not responsible for any issues that may arise.
 - **Browser Support:** 100%
 - **Mobile Support:** Full responsive
 
----
 
 ## 🗺️ Roadmap
 
@@ -743,7 +709,6 @@ Use at your own risk. We are not responsible for any issues that may arise.
 
 **Have suggestions?** [Open a feature request](https://github.com/HyperSentry-Labs/hs-loadingscreen/issues/new?template=feature_request.md)
 
----
 
 ## 📋 Changelog
 
@@ -771,7 +736,6 @@ Use at your own risk. We are not responsible for any issues that may arise.
 
 **Full changelog:** [CHANGELOG.md](CHANGELOG.md)
 
----
 
 ## 📌 Version History
 
@@ -794,7 +758,6 @@ Use at your own risk. We are not responsible for any issues that may arise.
 - Initial release
 - Basic loading screen functionality
 
----
 
 ## 🔗 Useful Links
 
@@ -802,7 +765,6 @@ Use at your own risk. We are not responsible for any issues that may arise.
 - **FiveM Discord:** [Community Support](https://discord.gg/fivem)
 - **NOX RolePlay:** [Server Website](https://nox-rp.ir)
 
----
 
 ## 📢 Spread the Word
 
@@ -814,7 +776,6 @@ If you're using NOX Loading Screen on your server, let us know! We'd love to fea
 - Reddit r/fivem
 - Twitter/X with #NOXLoadingScreen
 
----
 
 ## 📄 License
 
@@ -842,7 +803,6 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 ```
 
----
 
 ## 🆘 Support
 
@@ -861,7 +821,6 @@ SOFTWARE.
 - Make your changes
 - Submit a pull request
 
----
 
 ## 🙏 Credits
 
@@ -873,7 +832,6 @@ SOFTWARE.
 - CSS3 Animations
 - FiveM NUI System
 
----
 
 <div align="center">
 
@@ -884,7 +842,6 @@ SOFTWARE.
 [![GitHub issues](https://img.shields.io/github/issues/HyperSentry-Labs/hs-loadingscreen)](https://github.com/HyperSentry-Labs/hs-loadingscreen/issues)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
----
 
 ## 📄 License
 
@@ -914,7 +871,6 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 ```
 
----
 
 **Made with ❤️ by the FiveM Community**
 
