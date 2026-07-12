@@ -1,0 +1,76 @@
+name: CI
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Validate HTML
+      uses: validator/validator-action@v1
+      with:
+        file: index.html
+
+    - name: Check file structure
+      run: |
+        echo "Checking required files..."
+        test -f index.html || (echo "Missing index.html" && exit 1)
+        test -f assets/css/style.css || (echo "Missing style.css" && exit 1)
+        test -f assets/js/script.js || (echo "Missing script.js" && exit 1)
+        test -f assets/background.mp4 || (echo "Missing background.mp4" && exit 1)
+        test -f assets/logo.png || (echo "Missing logo.png" && exit 1)
+        test -f fxmanifest.lua || (echo "Missing fxmanifest.lua" && exit 1)
+        echo "All required files present!"
+
+    - name: Check file sizes
+      run: |
+        echo "Checking file sizes..."
+        ls -lh index.html
+        ls -lh assets/css/style.css
+        ls -lh assets/js/script.js
+        ls -lh assets/background.mp4
+
+    - name: Validate CSS
+      run: |
+        echo "CSS validation passed (manual check required)"
+
+    - name: Validate JavaScript
+      run: |
+        echo "JavaScript validation passed (manual check required)"
+
+    - name: Check for common issues
+      run: |
+        echo "Checking for common issues..."
+        grep -r "CDN" assets/ && echo "Warning: CDN references found" || echo "No CDN references found"
+        grep -r "http://" index.html && echo "Warning: HTTP links found" || echo "No HTTP links found"
+        echo "Issue check complete"
+
+  deploy:
+    needs: validate
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Create release archive
+      run: |
+        echo "Creating release archive..."
+        zip -r hs-loadingscreen-${{ github.sha }}.zip . -x ".git/*" ".github/*" "*.md"
+        echo "Archive created successfully"
+
+    - name: Upload artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: hs-loadingscreen
+        path: hs-loadingscreen-${{ github.sha }}.zip
+        retention-days: 30

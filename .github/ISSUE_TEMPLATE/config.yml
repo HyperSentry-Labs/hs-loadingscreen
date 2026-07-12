@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Documentation
+    url: https://github.com/HyperSentry-Labs/hs-loadingscreen#-frequently-asked-questions
+    about: Check the FAQ before opening an issue
+  - name: FiveM Documentation
+    url: https://docs.fivem.net/
+    about: Official FiveM documentation
+  - name: Community Support
+    url: https://discord.gg/fivem
+    about: Get help from the FiveM community

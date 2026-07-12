@@ -1,0 +1,17 @@
+# These owners will be the default owners for everything in
+# the repo. Unless a later match takes precedence, they
+# will be requested for review when someone opens a pull request.
+#
+# Each line is a file pattern followed by one or more owners.
+#
+# These owners will be requested for review when someone opens a pull request.
+*       @power0matin
+
+# The loading screen core files
+assets/js/script.js @power0matin
+assets/css/style.css @power0matin
+index.html @power0matin
+fxmanifest.lua @power0matin
+
+# Documentation
+*.md @power0matin
